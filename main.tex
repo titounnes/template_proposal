@@ -11,7 +11,6 @@
 %	VARIOUS REQUIRED PACKAGES
 %----------------------------------------------------------------------------------------
 
-%\documentclass[a4paper,12pt]{report} 
 \documentclass[a4paper,12pt]{report} 
 
 
@@ -27,7 +26,6 @@
 \usepackage{graphicx}
 \usepackage{xpatch}
 \usepackage[top=4cm,bottom=3cm,left=4cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
-%\usepackage[english]{babel}
 \usepackage{comment}
 \usepackage{titlesec}
 \usepackage[titles]{tocloft} % Required for manipulating the table of contents
@@ -108,15 +106,15 @@ giveninits=true,
 uniquename=init,
 maxbibnames=99
 ]{biblatex} 
-%\bibliographystyle{agsm}
 
-\DeclareLanguageMapping{indonesian}{indonesian-apa}
-\usepackage[english]{babel}
+%\usepackage{babelbib}
+\usepackage[indonesian]{babel}
 
 %\usepackage[nosectionbib]{apacite} 
-%\usepackage{natbib} 
+%\usepackage{natbib}
+%\usepackage[fixlanguage]{babelbib} 
 % menggunakan engine biber dengan style natbib
-\DefineBibliographyStrings{english}{andothers={\emph{et~al.}}}%\~al\adddot}} % et al italic               
+%\DefineBibliographyStrings{bahasa}{andothers={\emph{et~al.}}}%\~al\adddot}} % et al italic               
 \DefineBibliographyStrings{english}{and={dan}}%\~al\adddot}} % et al italic               
 \bibliography{bibliography.bib}
 
@@ -128,9 +126,6 @@ maxbibnames=99
   phdthesis = {PhD},
 }
 \newcommand*{\mkbiburlangle}[1]{#1}
-% or {<#1>}
-% or {\ensuremath{\langle}#1\ensuremath{\rangle}}
-% or {guilsinglleft#1\guilsingleright}
 \DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\space \mkbiburlangle{\url{#1}}}
 \DeclareFieldFormat{urldate}{\mkbibbrackets{\bibcpstring{urlseen}\space#1}}
 
@@ -330,7 +325,7 @@ maxbibnames=99
 
 \newpage
 \newcommand{\listappendixname}{Daftar Lampiran}
-\renewcommand\appendixtocname{Daftar Lampiran}
+\renewcommand\appendixtocname{Lampiran}
 \newlistof{appendix}{app}{\MakeUppercase{\listappendixname}}
 \setcounter{appdepth}{2}    
 \renewcommand{\theappendix}{Lampiran \arabic{appendix}.}
