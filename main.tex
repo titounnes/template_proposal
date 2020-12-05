@@ -36,6 +36,7 @@
 \usepackage{lscape}
 %\usepackage{rotating}
 \usepackage{pdfpages}
+\usepackage[toc,page]{appendix}
 
 %\usepackage[nosectionbib]{apacite} 
 
@@ -52,33 +53,11 @@
 
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{titlesec}
+\usepackage{scrwfile}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Pengaturan Judul bab
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\renewcommand\section{\@startsection {section}{1}{\z@}%
-%                               {-3.5ex \@plus -1ex \@minus -.2ex}%
-%                               {2.3ex \@plus.2ex}%
-%                               {\normalfont\scshape\bfseries}}
-%
-%\renewcommand\@makechapterhead[1]{%
-%  \vspace{60pt}% increase this if you need more space above the heading
-%  {\parindent \z@ \raggedright \normalfont
-%    \ifnum \c@secnumdepth >\m@ne
-%        \centering % I added centering
-%        \large\bfseries \@chapapp\space \thechapter 
-%        \par\nobreak
-%        %\vskip 0\p@
-%    \fi
-%    \linespread{1}
-%    %\interlinepenalty\@M
-%    \large \bfseries #1\par\nobreak
-%    \vskip 40\p@
-%  }}% 
-%\linespread{1}
-%\renewcommand{\thechapter{\arabic{}}
-
-%\renewcommand{\chaptername}{Lecture}
 
 \@addtoreset{chapter}{part}
 \setlength{\parskip}{0em}
@@ -92,21 +71,17 @@
 \renewcommand{\@chapapp}{BAB}
 \renewcommand{\chaptername}{BAB}
 \makeatother
-%\makeatletter
-%\renewcommand{\@chapapp}{Capitolo}
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Pengaturan Daftar isi
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand\listappendixname{DAFTAR LAMPIRAN}
 \newcommand\appcaption[1]{%
    \addcontentsline{app}{chapter}{#1}}
 \makeatletter
 \newcommand\listofappendices{%
-   \chapter*{\listappendixname}\@starttoc{app}}
+   \chapter{\listappendixname}\@starttoc{app}}
 \makeatother
 
 \newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
@@ -226,22 +201,9 @@ maxbibnames=99
 \addto\captionsenglish{\renewcommand{\tablename}{Tabel}}
 \renewcommand{\thetable}{\arabic{chapter}.\arabic{figure}}
 
-\newcommand\judul{Model Penyiapan Kompetensi Calon Guru dalam Pembelajaran Pemecahan Masalah Kolaboratif}
 \newcommand\cps{pemecahan masalah kolaboratif}
 \newcommand\fw{\emph{framework}}
 
-\newcommand\mahasiswa{Harjito}
-\newcommand\nim{0402619005}
-\newcommand{\prodi}{Ilmu Pengetahuan Alam}
-\newcommand{\tanggal}{20 september 2020}
-\newcommand{\promotor}{Prof. Dr. \emph{rer.nat.} Wahyu Hardyanto, M.Si.}
-\newcommand{\nippromotor}{19601124-198403-1-002}
-\newcommand{\kopromotor}{Dr. Sri Wardani, M.Si.}
-\newcommand{\nipkopromotor}{19571108-198303-2-001}
-\newcommand{\apromotor}{Dr. Woro Sumarni, M.Si}
-\newcommand{\nipapromotor}{19650723-199303-2-001}
-\newcommand\tab[1]{\hspace*{0.2\textwidth}\rlap{#1}}
-\setlength{\cftbeforechapskip}{0pt}
 
 \usepackage[none]{hyphenat}
 \newgeometry{lmargin=4cm,rmargin=3cm}
@@ -258,9 +220,28 @@ maxbibnames=99
 \titleformat{\subparagraph}[runin]
 {\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
 
-\usepackage[font=small]{caption}
-\begin{document}
+%%----------------------------------------------------------------------------------------
+%%	Pengaturan Lampiran
+%%----------------------------------------------------------------------------------------
 
+
+\usepackage[font=small]{caption}
+\newcommand\judul{Tuliskan judulnya di sini}
+\newcommand\mahasiswa{nama mahasiswa}
+\newcommand\nim{nim}
+\newcommand\tahun{2020}
+\newcommand\tanggal{20 september \tahun}
+\newcommand\dosen{Nama Dosen}
+\newcommand\nipdosen{nipdosen}
+\newcommand\prodi{Program Studi Anda}
+\newcommand\fakultas{Fakultas Anda}
+\newcommand\tab[1]{\hspace*{0.2\textwidth}\rlap{#1}}
+\setlength{\cftbeforechapskip}{0pt}
+\renewcommand\appendixname{Lampiran}
+\renewcommand\appendixpagename{Lampiran}
+
+
+\begin{document}
 %%----------------------------------------------------------------------------------------
 %%	Halaman Cover
 %%----------------------------------------------------------------------------------------
@@ -347,12 +328,30 @@ maxbibnames=99
 %%	Daftar Lampiran
 %%----------------------------------------------------------------------------------------
 
-%\newpage
-%\addcontentsline{toc}{chapter}{\protect\numberline{}Daftar Lampiran}
-%\listofappendices
+\newpage
+\newcommand{\listappendixname}{Daftar Lampiran}
+\renewcommand\appendixtocname{Daftar Lampiran}
+\newlistof{appendix}{app}{\MakeUppercase{\listappendixname}}
+\setcounter{appdepth}{2}    
+\renewcommand{\theappendix}{Lampiran \arabic{appendix}.}
+\renewcommand{\cftappendixpresnum}{Appendix\space}
+\setlength{\cftbeforeappendixskip}{\baselineskip}
+\setlength{\cftappendixnumwidth}{1in}
+\newlistentry[appendix]{subappendix}{app}{1}
+\renewcommand{\thesubappendix}{\theappendix.\arabic{subappendix}}
+\renewcommand{\cftsubappendixpresnum}{Appendix\space}
+\setlength{\cftsubappendixnumwidth}{1in}
+\setlength{\cftsubappendixindent}{0em}
 
-%%\part{ }
-%%\titleclass{\part}{top}
+\newcommand{\myappendix}[1]{%
+  \refstepcounter{appendix}%
+  \section*{\theappendix\space #1}%
+  \addcontentsline{app}{appendix}{\protect\numberline{\theappendix}#1}%
+  \par
+}
+
+\listofappendices
+
 
 %%----------------------------------------------------------------------------------------
 %%	Pengaturan halaman utama
@@ -383,13 +382,13 @@ maxbibnames=99
 %%----------------------------------------------------------------------------------------
 %%	Bab 2
 %%----------------------------------------------------------------------------------------
-\input{section/bab2}
+%\input{section/bab2}
 
 %
 %%----------------------------------------------------------------------------------------
 %%	Bab 3
 %%----------------------------------------------------------------------------------------
-\input{section/bab3}
+%\input{section/bab3}
 %
 %
 %%----------------------------------------------------------------------------------------
@@ -413,7 +412,6 @@ maxbibnames=99
 \newpage
 \setstretch{1.0}  
 \setlength{\bibitemsep}{1\baselineskip plus .05\baselineskip minus .05\baselineskip}
-\addcontentsline{toc}{section}{\protect\numberline{}{Daftar Pustaka}}
 \renewcommand{\bibname}{\MakeUppercase{Daftar Pustaka}\\}
 \renewcommand*{\bibfont}{\footnotesize}
 \xpatchbibmacro{date+extradate}{%
@@ -425,11 +423,13 @@ maxbibnames=99
 
 \renewcommand{\finalnamedelim}{\addspace\&\space}
 \DeclareNameAlias{sortname}{family-given} 
+\addcontentsline{toc}{chapter}{\protect\numberline{}{Daftar Pustaka}}
+\chapter*{\uppercase{Daftar Pustaka}}
 \printbibliography
+
 %----------------------------------------------------------------------------------------
 %%	Lampiran
 %%----------------------------------------------------------------------------------------
-
+\appendixpage
 \input{lampiran/lampiran}
-  
 \end{document}
