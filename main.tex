@@ -11,7 +11,7 @@
 %	VARIOUS REQUIRED PACKAGES
 %----------------------------------------------------------------------------------------
 
-\documentclass[a4paper,12pt]{report} 
+\documentclass[a4paper,12pt, indonesian]{report} 
 
 
 \makeatletter
@@ -108,13 +108,14 @@ maxbibnames=99
 ]{biblatex} 
 
 %\usepackage{babelbib}
-\usepackage[indonesian]{babel}
+\usepackage[indonesian, english]{babel}
 
 %\usepackage[nosectionbib]{apacite} 
 %\usepackage{natbib}
 %\usepackage[fixlanguage]{babelbib} 
 % menggunakan engine biber dengan style natbib
-%\DefineBibliographyStrings{bahasa}{andothers={\emph{et~al.}}}%\~al\adddot}} % et al italic               
+
+\DefineBibliographyStrings{english}{andothers={\emph{et~al.}}}%\~al\adddot}} % et al italic               
 \DefineBibliographyStrings{english}{and={dan}}%\~al\adddot}} % et al italic               
 \bibliography{bibliography.bib}
 
@@ -132,8 +133,6 @@ maxbibnames=99
 \DeclareFieldFormat
   [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
   {title}{#1\isdot}
-
-
 
 \AtEveryBibitem{\clearfield{month}}
 \AtEveryCitekey{\clearfield{month}}
@@ -186,10 +185,6 @@ maxbibnames=99
   %\rhead{**Right Header for just the first page**}
 }
 
-%
-%Variabel
-%
-
 
 \addto\captionsenglish{\renewcommand{\figurename}{Gambar}}
 \renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
@@ -198,7 +193,12 @@ maxbibnames=99
 
 \newcommand\cps{pemecahan masalah kolaboratif}
 \newcommand\fw{\emph{framework}}
-
+\def\captionsenglish{
+  \def\chaptername{Bab}%
+  \def\appendixname{Lampiran}%
+  \def\refname{Daftar Pustaka}%
+  \def\bibname{Daftar Pustaka}%
+}
 
 \usepackage[none]{hyphenat}
 \newgeometry{lmargin=4cm,rmargin=3cm}
@@ -234,6 +234,7 @@ maxbibnames=99
 \setlength{\cftbeforechapskip}{0pt}
 \renewcommand\appendixname{Lampiran}
 \renewcommand\appendixpagename{Lampiran}
+\renewcommand\chaptername{Bab}
 
 
 \begin{document}
@@ -246,7 +247,6 @@ maxbibnames=99
 \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{0mm}}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Halaman Judul}
 \input{pelengkap/cover}
-
 
 %----------------------------------------------------------------------------------------
 %	Pengaturan halaman awal
@@ -396,8 +396,7 @@ maxbibnames=99
 %%	Bab 5
 %%----------------------------------------------------------------------------------------
 %\input{section/bab5}
-%
-%
+
 %%----------------------------------------------------------------------------------------
 %%	Daftar Pustaka
 %%	Jangan mengubah bagian daftar pustaka
@@ -405,6 +404,7 @@ maxbibnames=99
 
 
 \newpage
+
 \setstretch{1.0}  
 \setlength{\bibitemsep}{1\baselineskip plus .05\baselineskip minus .05\baselineskip}
 \renewcommand{\bibname}{\MakeUppercase{Daftar Pustaka}\\}
@@ -417,9 +417,9 @@ maxbibnames=99
 }{}{}
 
 \renewcommand{\finalnamedelim}{\addspace\&\space}
+\renewcommand{\chaptername}{}
 \DeclareNameAlias{sortname}{family-given} 
-\addcontentsline{toc}{chapter}{\protect\numberline{}{Daftar Pustaka}}
-\chapter*{\uppercase{Daftar Pustaka}}
+\addcontentsline{toc}{chapter}{\protect{}{Daftar Pustaka }}
 \printbibliography
 
 %----------------------------------------------------------------------------------------
