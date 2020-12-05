@@ -1,0 +1,309 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format ini disusun menyesuaikan aturan penulisan
+% Structural Definitions File
+%
+% Ditulis Oleh: Harjito 
+% Harjito@mail.unnes.ac.id
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------------------
+%	VARIOUS REQUIRED PACKAGES
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper,12pt, headings=optiontohead]{report} 
+
+\makeatletter
+% I assume you want A4 mot US-letter, and you want chapters so report not article
+%\documentclass[12pt,a4paper]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan Package
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}
+\usepackage{xpatch}
+\usepackage[top=4cm,bottom=3cm,left=4cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
+\usepackage[indonesian]{babel}
+%\usepackage[english]{babel}
+\usepackage{comment}
+\usepackage{titlesec}
+%\usepackage[titles]{tocloft} % Required for manipulating the table of contents
+\usepackage{lipsum}
+%\usepackage{titletoc} 
+\usepackage{tocbasic}
+
+%\usepackage[nosectionbib]{apacite} 
+%\usepackage{natbib} 
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{indentfirst}
+% Font Settings
+\usepackage{times, mathptmx} % Use the Times font for headings
+%\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage{csquotes}
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pengaturan Judul bab
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\renewcommand\section{\@startsection {section}{1}{\z@}
+%                               {-3.5ex \@plus -1ex \@minus -.2ex}
+%                               {2.3ex \@plus.2ex}
+%                               {\normalfont\scshape\bfseries}}
+%
+%\renewcommand\@makechapterhead[1]{%
+%  \vspace{60pt}% increase this if you need more space above the heading
+%  {\parindent \z@ \raggedright \normalfont
+%    \ifnum \c@secnumdepth >\m@ne
+%        \centering % I added centering
+%        \large\bfseries \@chapapp\space \thechapter 
+%        \par\nobreak
+%        %\vskip 0\p@
+%    \fi
+%    \linespread{1}
+%    %\interlinepenalty\@M
+%    \large \bfseries #1\par\nobreak
+%    \vskip 40\p@
+%  }}% 
+%\linespread{1}
+%\renewcommand{\thechapter{\arabic{}}
+
+%\renewcommand{\chaptername}{Lecture}
+
+\@addtoreset{chapter}{part}
+\setlength{\parskip}{0em}
+\setlength{\parindent}{4em}
+\renewcommand{\baselinestretch}{2.0}
+\newcommand{\bigsize}{\fontsize{16pt}{20pt}\selectfont}
+\newcommand{\midsize}{\fontsize{14pt}{18pt}\selectfont}
+\newcommand{\norsize}{\fontsize{12pt}{16pt}\selectfont}
+
+\makeatletter
+\renewcommand{\@chapapp}{BAB}
+\renewcommand{\chaptername}{BAB}
+\makeatother
+%\makeatletter
+%\renewcommand{\@chapapp}{Capitolo}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan Daftar isi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\listappendixname{DAFTAR LAMPIRAN}
+\newcommand\appcaption[1]{%
+   \addcontentsline{app}{chapter}{#1}}
+\makeatletter
+\newcommand\listofappendices{%
+   \chapter*{\listappendixname}\@starttoc{app}}
+\makeatother
+
+\newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
+
+\renewcommand{\cftchapfont}{\norsize}  
+\renewcommand{\cftchappagefont}{\norsize}  
+\renewcommand{\cftsecfont}{\norsize}  
+
+\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan bibliografi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bibliography
+\usepackage[backend=biber, 
+natbib=true,
+style=authoryear,
+sorting=nyt,
+maxcitenames=3,
+giveninits=true,
+uniquename=init,
+maxbibnames=99
+]{biblatex} 
+%\usepackage[nosectionbib]{apacite} 
+%\usepackage{natbib} 
+
+% menggunakan engine biber dengan style natbib
+
+\DefineBibliographyStrings{english}{andothers={\emph{et~al.}}}%\~al\adddot}} % et al italic               
+\DefineBibliographyStrings{english}{and={dan}}%\~al\adddot}} % et al italic               
+\bibliography{bibliography.bib}
+
+\DefineBibliographyStrings{english}{
+  urlfrom   = {},
+  urlseen   = {Diunduh },
+  bathesis  = {BA},
+  mathesis  = {MA},
+  phdthesis = {PhD},
+}
+\newcommand*{\mkbiburlangle}[1]{#1}
+% or {<#1>}
+% or {\ensuremath{\langle}#1\ensuremath{\rangle}}
+% or {guilsinglleft#1\guilsingleright}
+\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\space \mkbiburlangle{\url{#1}}}
+\DeclareFieldFormat{urldate}{\mkbibbrackets{\bibcpstring{urlseen}\space#1}}
+
+\DeclareFieldFormat
+  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  {title}{#1\isdot}
+
+
+%% 1.2
+%\DeclareDelimFormat*{nameyeardelim}{\addcomma\space}
+%\DeclareDelimFormat[textcite]{nameyeardelim}{\addspace}
+%
+%% 2.5
+%\DeclareDelimFormat{andothersdelim}{\addcomma\space}
+%
+%% 2.7
+%\renewcommand*{\compcitedelim}{\multicitedelim}
+%
+%% 2.8
+%\makeatletter
+%\AtEveryCitekey{\global\undef\cbx@lastyear}
+%\makeatother
+%
+%% ignore 2.10 for the time being
+%
+%% 4.1
+%\DeclareNameAlias{sortname}{family-given}
+%\DeclareFieldFormat{biblabeldate}{#1}
+%\DeclareFieldAlias{biblistlabeldate}{biblabeldate}
+%
+%% 4.3
+%\DeclareDelimFormat{editortypedelim}{\addspace}
+%\DeclareDelimFormat{translatortypedelim}{\addspace}
+%
+%% 4.4
+%\DeclareFieldFormat
+%  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+%  {title}{#1\isdot}
+%
+%% as for the year of the chapterv vs year of the book in 4.4
+%% I have never seen such a distinction and in general I imagine
+%% it would be quite hard to find out the year of a chapter
+%% in a collection work since only the year of the collection is given
+%% I imagine that in practice you would almost always end up douplicating
+%% the year.
+%
+%% 4.8 & 5.11
+%\DefineBibliographyStrings{english}{
+%  urlfrom   = {},
+%  urlseen   = {Diunduh },
+%  bathesis  = {BA},
+%  mathesis  = {MA},
+%  phdthesis = {PhD},
+%}
+%\newcommand*{\mkbiburlangle}[1]{#1}
+%% or {<#1>}
+%% or {\ensuremath{\langle}#1\ensuremath{\rangle}}
+%% or {guilsinglleft#1\guilsingleright}
+%\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\space \mkbiburlangle{\url{#1}}}
+%\DeclareFieldFormat{urldate}{\mkbibbrackets{\bibcpstring{urlseen}\space#1}}
+%
+%% 4.9
+%\renewcommand*{\jourvoldelim}{\addcomma\space}
+%\renewcommand*{\volnumdelim}{}
+%\DeclareFieldFormat[article,periodical]{number}{\mkbibparens{#1}}
+%
+%\renewcommand*{\volnumdatedelim}{\addcomma\space}
+%\DeclareFieldFormat{issuedate}{#1}
+%
+%% 4.12 :-(
+%% note that I used the new preferred resolver https://doi.org/
+%% instead of http://dx.doi.org/
+%\DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
+
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan judul bab
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbibheading{bibempty}{}
+\usepackage{setspace}
+
+\patchcmd{\maketitle}
+	{\@maketitle}
+	{\@maketitle\vspace{-2em}}% change the value as needed
+	{}
+	{}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan pengaturan
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{Pictures/}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan Bab
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+\usepackage[linktocpage=true]{hyperref}
+
+\pagestyle{fancy}
+
+\fancyhead[L]{ }
+%\fancyhead[R]{\thepage}
+\rhead{\thepage}
+\cfoot{ }
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{firstpage}{%
+	\rhead{ }
+	\cfoot{\thepage}
+  %\lhead{**Left Header for just the first page**}
+  %\rhead{**Right Header for just the first page**}
+}
+
+%
+%Variabel
+%
+
+
+\addto\captionsenglish{\renewcommand{\figurename}{Gambar}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\addto\captionsenglish{\renewcommand{\tablename}{Tabel}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+
+\newcommand\judul{Tuliskan judul pkm di sini}
+
+\newcommand\mahasiswa{nama mahasiswa}
+\newcommand\nim{nim}
+\newcommand{\prodi}{Prodi anda}
+\newcommand{\tanggal}{20 september 2020}
+\newcommand{\promotor}{Prof. Dr. \emph{rer.nat.} Wahyu Hardyanto, M.Si.}
+\newcommand{\nippromotor}{19601124-198403-1-002}
+\newcommand{\kopromotor}{Dr. Sri Wardani, M.Si.}
+\newcommand{\nipkopromotor}{19571108-198303-2-001}
+\newcommand{\apromotor}{Dr. Woro Sumarni, M.Si}
+\newcommand{\nipapromotor}{19650723-199303-2-001}
+\newcommand\tab[1]{\hspace*{0.2\textwidth}\rlap{#1}}
+
+\setlength{\cftbeforechapskip}{0pt}
+\usepackage{sectsty}
+\subsectionfont{\normalsize}
+
+\usepackage[none]{hyphenat}
+\newgeometry{lmargin=4cm,rmargin=3cm}

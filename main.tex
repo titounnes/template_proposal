@@ -1,0 +1,435 @@
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format ini disusun menyesuaikan aturan penulisan
+% Structural Definitions File
+%
+% Ditulis Oleh: Harjito 
+% Harjito@mail.unnes.ac.id
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------------------
+%	VARIOUS REQUIRED PACKAGES
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper,12pt]{report} 
+\documentclass[a4paper,12pt]{report} 
+
+
+\makeatletter
+% I assume you want A4 mot US-letter, and you want chapters so report not article
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan Package
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}
+\usepackage{xpatch}
+\usepackage[top=4cm,bottom=3cm,left=4cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
+%\usepackage[english]{babel}
+\usepackage{comment}
+\usepackage{titlesec}
+\usepackage[titles]{tocloft} % Required for manipulating the table of contents
+\usepackage{lipsum}
+\usepackage{titletoc} 
+\usepackage{lscape}
+%\usepackage{rotating}
+\usepackage{pdfpages}
+
+%\usepackage[nosectionbib]{apacite} 
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{indentfirst}
+% Font Settings
+\usepackage{times, mathptmx} % Use the Times font for headings
+%\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage{csquotes}
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{titlesec}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pengaturan Judul bab
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\renewcommand\section{\@startsection {section}{1}{\z@}%
+%                               {-3.5ex \@plus -1ex \@minus -.2ex}%
+%                               {2.3ex \@plus.2ex}%
+%                               {\normalfont\scshape\bfseries}}
+%
+%\renewcommand\@makechapterhead[1]{%
+%  \vspace{60pt}% increase this if you need more space above the heading
+%  {\parindent \z@ \raggedright \normalfont
+%    \ifnum \c@secnumdepth >\m@ne
+%        \centering % I added centering
+%        \large\bfseries \@chapapp\space \thechapter 
+%        \par\nobreak
+%        %\vskip 0\p@
+%    \fi
+%    \linespread{1}
+%    %\interlinepenalty\@M
+%    \large \bfseries #1\par\nobreak
+%    \vskip 40\p@
+%  }}% 
+%\linespread{1}
+%\renewcommand{\thechapter{\arabic{}}
+
+%\renewcommand{\chaptername}{Lecture}
+
+\@addtoreset{chapter}{part}
+\setlength{\parskip}{0em}
+\setlength{\parindent}{4em}
+\renewcommand{\baselinestretch}{2.0}
+\newcommand{\bigsize}{\fontsize{16pt}{20pt}\selectfont}
+\newcommand{\midsize}{\fontsize{14pt}{18pt}\selectfont}
+\newcommand{\norsize}{\fontsize{12pt}{16pt}\selectfont}
+
+\makeatletter
+\renewcommand{\@chapapp}{BAB}
+\renewcommand{\chaptername}{BAB}
+\makeatother
+%\makeatletter
+%\renewcommand{\@chapapp}{Capitolo}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan Daftar isi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\listappendixname{DAFTAR LAMPIRAN}
+\newcommand\appcaption[1]{%
+   \addcontentsline{app}{chapter}{#1}}
+\makeatletter
+\newcommand\listofappendices{%
+   \chapter*{\listappendixname}\@starttoc{app}}
+\makeatother
+
+\newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
+
+\renewcommand{\cftchapfont}{\norsize}  
+\renewcommand{\cftchappagefont}{\norsize}  
+\renewcommand{\cftsecfont}{\norsize}  
+
+\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan bibliografi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bibliography
+\usepackage[backend=biber, 
+natbib=true,
+style=authoryear,
+sorting=nyt,
+maxcitenames=3,
+giveninits=true,
+uniquename=init,
+maxbibnames=99
+]{biblatex} 
+%\bibliographystyle{agsm}
+
+\DeclareLanguageMapping{indonesian}{indonesian-apa}
+\usepackage[english]{babel}
+
+%\usepackage[nosectionbib]{apacite} 
+%\usepackage{natbib} 
+% menggunakan engine biber dengan style natbib
+\DefineBibliographyStrings{english}{andothers={\emph{et~al.}}}%\~al\adddot}} % et al italic               
+\DefineBibliographyStrings{english}{and={dan}}%\~al\adddot}} % et al italic               
+\bibliography{bibliography.bib}
+
+\DefineBibliographyStrings{english}{
+  urlfrom   = {},
+  urlseen   = {Diunduh },
+  bathesis  = {BA},
+  mathesis  = {MA},
+  phdthesis = {PhD},
+}
+\newcommand*{\mkbiburlangle}[1]{#1}
+% or {<#1>}
+% or {\ensuremath{\langle}#1\ensuremath{\rangle}}
+% or {guilsinglleft#1\guilsingleright}
+\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\space \mkbiburlangle{\url{#1}}}
+\DeclareFieldFormat{urldate}{\mkbibbrackets{\bibcpstring{urlseen}\space#1}}
+
+\DeclareFieldFormat
+  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  {title}{#1\isdot}
+
+
+
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan judul bab
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbibheading{bibempty}{}
+\usepackage{setspace}
+
+\patchcmd{\maketitle}
+	{\@maketitle}
+	{\@maketitle\vspace{-2em}}% change the value as needed
+	{}
+	{}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan pengaturan
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{Pictures/}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Pengaturan Bab
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+\usepackage[linktocpage=true,hidelinks]{hyperref}
+
+\pagestyle{fancy}
+
+\fancyhead[L]{ }
+%\fancyhead[R]{\thepage}
+\rhead{\thepage}
+\cfoot{ }
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{firstpage}{%
+	\rhead{ }
+	\cfoot{\thepage}
+  %\lhead{**Left Header for just the first page**}
+  %\rhead{**Right Header for just the first page**}
+}
+
+%
+%Variabel
+%
+
+
+\addto\captionsenglish{\renewcommand{\figurename}{Gambar}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\addto\captionsenglish{\renewcommand{\tablename}{Tabel}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{figure}}
+
+\newcommand\judul{Model Penyiapan Kompetensi Calon Guru dalam Pembelajaran Pemecahan Masalah Kolaboratif}
+\newcommand\cps{pemecahan masalah kolaboratif}
+\newcommand\fw{\emph{framework}}
+
+\newcommand\mahasiswa{Harjito}
+\newcommand\nim{0402619005}
+\newcommand{\prodi}{Ilmu Pengetahuan Alam}
+\newcommand{\tanggal}{20 september 2020}
+\newcommand{\promotor}{Prof. Dr. \emph{rer.nat.} Wahyu Hardyanto, M.Si.}
+\newcommand{\nippromotor}{19601124-198403-1-002}
+\newcommand{\kopromotor}{Dr. Sri Wardani, M.Si.}
+\newcommand{\nipkopromotor}{19571108-198303-2-001}
+\newcommand{\apromotor}{Dr. Woro Sumarni, M.Si}
+\newcommand{\nipapromotor}{19650723-199303-2-001}
+\newcommand\tab[1]{\hspace*{0.2\textwidth}\rlap{#1}}
+\setlength{\cftbeforechapskip}{0pt}
+
+\usepackage[none]{hyphenat}
+\newgeometry{lmargin=4cm,rmargin=3cm}
+\hbadness=10000
+
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}[runin]
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}[runin]
+{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+
+\usepackage[font=small]{caption}
+\begin{document}
+
+%%----------------------------------------------------------------------------------------
+%%	Halaman Cover
+%%----------------------------------------------------------------------------------------
+\pagenumbering{roman} % penomoran romawi
+\setcounter{page}{0}
+\addtocontents{toc}{~\hfill\textbf{Hal}\par}
+\addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{0mm}}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Halaman Judul}
+\input{pelengkap/cover}
+
+
+%----------------------------------------------------------------------------------------
+%	Pengaturan halaman awal
+%----------------------------------------------------------------------------------------
+
+\pagenumbering{roman} % penomoran romawi
+\setcounter{page}{2} % dimualai dari halaman 2
+\setcounter{chapter}{1}
+\setstretch{1.5}
+\titlespacing*{\chapter}{0pt}{-2\baselineskip}{1em}
+\titleformat{\chapter}[display]
+{}{}{0pt}{\centering\norsize\textbf}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+%----------------------------------------------------------------------------------------
+%%	Halaman Persetujuan
+%%----------------------------------------------------------------------------------------
+%\addcontentsline{toc}{chapter}{\protect\numberline{}{Persetujuan Pembimbing}}
+%\input{pelengkap/Persetujuan}
+%\newpage
+%
+
+%%----------------------------------------------------------------------------------------
+%%	Halaman Abstrak
+%%----------------------------------------------------------------------------------------
+
+%%\newpage
+%%\addchap{ABSTRAK}
+\addcontentsline{toc}{chapter}{\protect\numberline{}{Abstrak}}
+\chapter*{\uppercase{Abstrak}}
+%
+%
+%
+%%----------------------------------------------------------------------------------------
+%%	Daftar Isi
+%%----------------------------------------------------------------------------------------
+
+\newpage
+\singlespacing
+\addcontentsline{toc}{chapter}{\protect\numberline{}Daftar Isi}
+\renewcommand{\contentsname}{DAFTAR ISI}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % 
+\renewcommand{\chaptertitlename}{bab}
+\newgeometry{lmargin=4cm,rmargin=3cm}
+\begin{spacing}{1.5}
+   	\tableofcontents
+	\setlength{\cftbeforetoctitleskip}{-3em}
+\end{spacing}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	Daftar Gambar
+%%----------------------------------------------------------------------------------------
+
+\newpage
+\renewcommand{\listfigurename}{DAFTAR GAMBAR}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Daftar Gambar}
+\begin{spacing}{1.5}
+   \listoffigures
+\end{spacing}
+
+%----------------------------------------------------------------------------------------
+%%	Daftar Tabel
+%%----------------------------------------------------------------------------------------
+
+\newpage
+\renewcommand{\listtablename}{DAFTAR TABEL}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Daftar Tabel}
+\begin{spacing}{1.5}
+   \listoftables
+\end{spacing}
+
+%----------------------------------------------------------------------------------------
+%%	Daftar Lampiran
+%%----------------------------------------------------------------------------------------
+
+%\newpage
+%\addcontentsline{toc}{chapter}{\protect\numberline{}Daftar Lampiran}
+%\listofappendices
+
+%%\part{ }
+%%\titleclass{\part}{top}
+
+%%----------------------------------------------------------------------------------------
+%%	Pengaturan halaman utama
+%%----------------------------------------------------------------------------------------
+
+\newpage
+\restoregeometry
+\setstretch{1.5}  
+\setcounter{chapter}{0}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\titleformat{\chapter}[display]
+{\midsize\bfseries}{\filcenter{\MakeUppercase{{\chaptertitlename}}\ \thechapter}}{0pt}{\centering\midsize\textbf}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{18mm}}
+
+\titlecontents{chapter}% <section-type>
+  [0pt]% <left>
+  {}% <above-code>
+  {\chaptername\ \thecontentslabel \quad}% <numbered-entry-format>
+  {}% <numberless-entry-format>
+  {\hfill\contentspage}% <filler-page-format>
+
+%----------------------------------------------------------------------------------------
+%	Bab 1
+%----------------------------------------------------------------------------------------
+\input{section/bab1}
+%%----------------------------------------------------------------------------------------
+%%	Bab 2
+%%----------------------------------------------------------------------------------------
+\input{section/bab2}
+
+%
+%%----------------------------------------------------------------------------------------
+%%	Bab 3
+%%----------------------------------------------------------------------------------------
+\input{section/bab3}
+%
+%
+%%----------------------------------------------------------------------------------------
+%%	Bab 4
+%%----------------------------------------------------------------------------------------
+%\input{section/bab4}
+%
+%
+%%----------------------------------------------------------------------------------------
+%%	Bab 5
+%%----------------------------------------------------------------------------------------
+%\input{section/bab5}
+%
+%
+%%----------------------------------------------------------------------------------------
+%%	Daftar Pustaka
+%%	Jangan mengubah bagian daftar pustaka
+%%----------------------------------------------------------------------------------------
+
+
+\newpage
+\setstretch{1.0}  
+\setlength{\bibitemsep}{1\baselineskip plus .05\baselineskip minus .05\baselineskip}
+\addcontentsline{toc}{section}{\protect\numberline{}{Daftar Pustaka}}
+\renewcommand{\bibname}{\MakeUppercase{Daftar Pustaka}\\}
+\renewcommand*{\bibfont}{\footnotesize}
+\xpatchbibmacro{date+extradate}{%
+  \printtext[parens]%
+}{%
+  \setunit{\addperiod\space}%
+  \printtext%
+}{}{}
+
+\renewcommand{\finalnamedelim}{\addspace\&\space}
+\DeclareNameAlias{sortname}{family-given} 
+\printbibliography
+%----------------------------------------------------------------------------------------
+%%	Lampiran
+%%----------------------------------------------------------------------------------------
+
+\input{lampiran/lampiran}
+  
+\end{document}
